@@ -1,0 +1,27 @@
+
+
+img{
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+h1 {
+    color: white;
+    font-weight: bold;
+}
+h2 {
+    color: white
+}
+
+h4 {
+    color:white
+}
+
+p {
+    color: white
+}
+
+.image {
+    height: 100%;
+}

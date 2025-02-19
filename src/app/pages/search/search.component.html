@@ -1,0 +1,29 @@
+<div class="container-fluid mt-5 mb-5">
+  <form class="d-flex" role="search">
+    <input
+      [(ngModel)]="searchText"
+      (ngModelChange)="onInputChange($event)"
+      name="searchText"
+      class="form-control me-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="container">
+  <div class="row">
+    @for (movie of movies; track $index) { @if (movie.poster_path) {
+    <div class="col-sm-12 col-md-4 col-lg-3 py-2 one-item">
+      <div class="card">
+        <div class="poster" [routerLink]="['/movie', movie.id]">
+          <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" />
+        </div>
+        <div class="name">{{ movie.title }}</div>
+      </div>
+    </div>
+    } }
+  </div>
+</div>

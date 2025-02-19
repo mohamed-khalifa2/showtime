@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { MovieInterface } from '../interfaces/Movies.interface';
 import { ResultView } from '../interfaces/resultView';
-import { RootObject } from '../interfaces/Videos.insterface';
+import { VideoInterface } from '../interfaces/Videos.insterface';
 import { MovieDetailsView } from '../interfaces/movieDetails.interface';
 
 @Injectable({
@@ -32,8 +32,8 @@ export class GenericService {
   getMovieDetails(id: any): Observable<MovieDetailsView> {
     return this.httpClient.get<MovieDetailsView>(`${environment.baseUrl}/movie/${id}`)
   }
-  getVideos(id: unknown): Observable<RootObject> {
-    return this.httpClient.get<RootObject>(`${environment.baseUrl}/movie/${id}/videos`)
+  getVideos(id: any): Observable<VideoInterface> {
+    return this.httpClient.get<VideoInterface>(`${environment.baseUrl}/movie/${id}/videos`)
   }
 
   getMovieCredits(id: any) {

@@ -1,23 +1,15 @@
-::ng-deep body {
-    
-    background:#0d1420;
-  }
 .navbar .navbar-brand {
-    color: #E50914;
-    font-weight: bold;
+  color: #e50914;
+  font-weight: bold;
 }
 
+.nav-link {
+  margin-right: 0%;
+}
 .navbar-nav .nav-item .nav-link {
-    color: #E50914;
+  color: #e50914;
 }
 
 div {
-    color: aliceblue;
-}
-
-.form-control{
-    background: none;
-    border-radius: 80px;
-    border-color: #E50914;
-
+  color: aliceblue;
 }

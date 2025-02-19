@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface VideoInterface {
     id: number;
     results: Result[];
 }

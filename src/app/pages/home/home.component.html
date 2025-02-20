@@ -14,17 +14,16 @@
 <!-- banner end -->
 
 <!-- trending start -->
-
 <div class="contain mt-3 p-4">
   <h5 class="trending text-white">Trending Movies</h5>
   <swiper-container
-    class="mySwiper"
+    class="trending-container"
     slides-per-view="5"
     space-between="30"
     free-mode="true"
   >
     @for (movie of Trending; track $index) {
-    <swiper-slide
+    <swiper-slide class="trending-slide"
       ><img
         src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
         [routerLink]="['/movie', movie.id]"
@@ -37,32 +36,39 @@
 <!-- browse movies start -->
 <div class="container">
   <h5 class="browse">Browse Movies</h5>
-  <!-- search bar -->
-
-  <!-- search bar -->
-
   <div class="row">
-    @for (movie of movies; track $index) {
-    <div class="col-sm-12 col-md-4 col-lg-3 py-2 one-item">
-      <div class="card">
-        <div class="poster" [routerLink]="['/movie', movie.id]">
-          <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" />
+    @for (movie of movies; track $index) { @if (movie.poster_path) {
+    <div class="col-sm-10 col-md-6 col-lg-3 py-2 one-item card-wrapper">
+      <div class="movie-card">
+        <div class="image-wrapper">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+            [routerLink]="['/movie', movie.id]"
+          />
+          <div class="overlay">
+            <h3>{{ movie.title }}</h3>
+            <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
+          </div>
         </div>
       </div>
     </div>
-    }
+    } }
   </div>
 </div>
 <!-- pagination start -->
 
-<nav class="mt-5 d-flex justify-content-center pagination">
-  <ul class="pagination pagination-sm">
-    @for (item of pageArray; track $index) {
-    <li class="page-item" (click)="changePage($index + 1)">
-      <a class="page-link">{{ $index + 1 }}</a>
+<nav class="pagination-container">
+  <ul class="pagination">
+    <!-- Page Numbers -->
+    @for (page of pageArray; track $index) {
+    <li
+      (click)="changePage($index + 1)"
+      [class.active]="currentPage === page"
+      [class.ellipsis]="page === -1"
+    >
+      {{ page === -1 ? "..." : page }}
     </li>
     }
   </ul>
 </nav>
-
 <!-- pagination end -->

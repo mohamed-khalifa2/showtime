@@ -80,7 +80,10 @@ export class HomeComponent {
   changePage(page: number) {
     this.currentPage = page;
     this.fetchMovies();
+    scrollTo(0, 1740);
   }
+
+
 }
 
 

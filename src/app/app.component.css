@@ -8,6 +8,12 @@
 }
 .navbar-nav .nav-item .nav-link {
   color: #e50914;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.nav-item {
+  margin-right: 50px;
 }
 
 div {
@@ -18,4 +24,22 @@ div {
   width: 100px;
   padding: 0;
   margin: 0;
+}
+
+.search-icon {
+  color: #e50914;
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  display: none;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .search-title {
+    display: none;
+  }
+  .search-icon {
+    display: block;
+  }
 }

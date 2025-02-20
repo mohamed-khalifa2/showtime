@@ -2,6 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
+import { NgStyle } from '@angular/common';
 
 register();
 
@@ -10,7 +11,7 @@ register();
   selector: 'app-home',
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [RouterLink],
+  imports: [RouterLink, NgStyle],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -80,7 +81,7 @@ export class HomeComponent {
   changePage(page: number) {
     this.currentPage = page;
     this.fetchMovies();
-    scrollTo(0, 1740);
+    scrollTo(0, 0);
   }
 
 

@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-search',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [GenericService],
   imports: [FormsModule, RouterLink],
   templateUrl: './search.component.html',

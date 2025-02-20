@@ -1,33 +1,36 @@
-<div class="container mt-5 mb-5">
-  <form class="d-flex" role="search">
-    <input
-      [(ngModel)]="searchText"
-      (ngModelChange)="onInputChange($event)"
-      name="searchText"
-      class="form-control me-2"
-      type="search"
-      placeholder="Search"
-      aria-label="Search"
-    />
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
+<div class="container mt-5">
+  <h3>Search Movies</h3>
+  <div class="contain mt-3 mb-5">
+    <form role="search" class="my-form mb-5">
+      <input
+        [(ngModel)]="searchText"
+        (ngModelChange)="onInputChange($event)"
+        name="searchText"
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
 
-  <div class="row">
-    @for (movie of movies; track $index) { @if (movie.poster_path) {
-    <div class="col-sm-10 col-md-6 col-lg-3 py-2 one-item card-wrapper">
-      <div class="movie-card">
-        <div class="image-wrapper">
-          <img
-            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-            [routerLink]="['/movie', movie.id]"
-          />
-          <div class="overlay">
-            <h3>{{ movie.title }}</h3>
-            <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
+    <div class="row">
+      @for (movie of movies; track $index) { @if (movie.poster_path) {
+      <div class="col-sm-10 col-md-6 col-lg-3 py-2 one-item card-wrapper">
+        <div class="movie-card">
+          <div class="image-wrapper">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              [routerLink]="['/movie', movie.id]"
+            />
+            <div class="overlay">
+              <h3>{{ movie.title }}</h3>
+
+              <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
+            </div>
           </div>
         </div>
       </div>
+      } }
     </div>
-    } }
   </div>
 </div>

@@ -41,3 +41,4 @@ export class MovieDetailsComponent {
   }
 }
 
+// remember loading spinner

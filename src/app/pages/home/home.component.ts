@@ -1,7 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 
 register();
@@ -16,11 +17,16 @@ register();
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  private Http = inject(GenericService);
+
+  movies: any[] = []
+  bannerMovies: any[] = []
+  Trending: any[] = []
+
 
   searchText: string = ''
-  bannerMovies: any[] = []
-  movies: any[] = []
-  Trending: any[] = []
+
+
 
   pageNum: number = 1;
   currentPage: number = 1;
@@ -28,17 +34,25 @@ export class HomeComponent {
 
 
 
-  constructor(private Http: GenericService) { }
-
   ngOnInit() {
-    this.fetchMovies()
-    this.fetchTrending()
-    this.fetchBannerUpcoming()
-    console.log('initialized')
+
+    forkJoin({
+      movies: this.Http.getMovies(this.currentPage.toString()),
+      banner: this.Http.getBannerUpcoming(),
+      trending: this.Http.getTrending()
+    }).subscribe({
+      next: ({ movies, banner, trending }) => {
+
+        this.movies = movies.results;
+        this.pageNum = movies.total_pages;
+        this.pageArray = Array.from({ length: 10 }, (_, i) => i + 1);
+        this.bannerMovies = banner.results;
+        this.Trending = trending.results;
+      },
+      error: (err) => console.log(err)
+    })
+
   };
-
-
-
 
 
 
@@ -47,35 +61,14 @@ export class HomeComponent {
       next: (data) => {
         this.movies = data.results;
         this.pageNum = data.total_pages;
-
         this.pageArray = Array.from({ length: 10 }, (_, i) => i + 1);
-
-      }
-
-      , error: (err) => {
+      },
+      error: (err) => {
         console.log(err)
       }
     })
   }
 
-  fetchTrending() {
-    this.Http.getTrending().subscribe({
-      next: (data) => {
-        this.Trending = data.results;
-      }
-    })
-  }
-
-
-  fetchBannerUpcoming() {
-    this.Http.getBannerUpcoming().subscribe({
-      next: (data) => {
-        this.bannerMovies = data.results;
-      },
-      error: err => console.log(err),
-    })
-
-  }
 
 
   changePage(page: number) {

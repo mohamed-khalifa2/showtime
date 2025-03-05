@@ -3,39 +3,47 @@ import { GenericService } from '../../services/generic.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-search',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [GenericService],
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, SpinnerComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  constructor(private Http: GenericService) { }
   searchText: string = '';
-  movies: any[] = [];
-  ngOnInit() {
+  loading = false;
 
+  movies: any[] = [];
+  private searchSubject = new Subject<string>();
+
+  constructor(private Http: GenericService) { }
+
+  ngOnInit() {
+    this.searchSubject.pipe(
+      debounceTime(700),
+      distinctUntilChanged(),
+      switchMap((searchText) => this.Http.getMovieByTitle(searchText))
+    ).subscribe({
+      next: (data) => {
+        this.movies = data.results
+        this.loading = false
+      },
+      error: (err) => console.log(err)
+    });
   }
 
   onInputChange(value: string) {
-    this.fetchSearchedMovie(value)
+    this.searchSubject.next(value);
+    if (value !== '') {
+      this.loading = true
+    } else {
+      this.loading = false
+    }
   }
-
-  fetchSearchedMovie(searchText: string) {
-    return this.Http.getMovieByTitle(searchText).subscribe({
-      next: (data) => {
-
-        this.movies = data.results
-
-
-
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
 
 }

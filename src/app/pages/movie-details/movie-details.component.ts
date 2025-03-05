@@ -19,7 +19,7 @@ export class MovieDetailsComponent {
   movieDetails: any = {}
   movieCredits: any = []
   photo = ''
-  videos: any[] = []
+  video: any = {}
   paramId: any = ''
 
   ngOnInit() {
@@ -33,12 +33,13 @@ export class MovieDetailsComponent {
       next: ({ details, videos, credits }) => {
         this.movieDetails = details;
         this.photo = `https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${details.backdrop_path}`;
-        this.videos = videos.results.map((video) => `https://www.youtube.com/embed/${video.key}`);
+        this.video = videos.results.find((video) => video.type === "Trailer");
         this.movieCredits = credits;
+
       },
       error: (err) => console.error('Error fetching movie data:', err),
     });
   }
+
 }
 
-// remember loading spinner

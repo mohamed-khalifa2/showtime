@@ -87,9 +87,10 @@ export class HomeComponent {
     if (page !== "..." && page !== this.currentPage) {
       this.currentPage = page;
     }
-    this.movieBrowse.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     this.loading = true
     this.fetchMovies();
+    this.movieBrowse.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 
   }
 

@@ -36,7 +36,9 @@ swiper-slide img {
 .container {
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
+
 .trending {
   font-size: 40px;
 }

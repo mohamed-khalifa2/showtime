@@ -30,9 +30,12 @@
       <h2 class="mt-4">Trailer</h2>
       @if (video) {
       <div class="row">
-        <div class="col-lg-6">
-          <iframe width="700" height="430" [src]="'https://www.youtube.com/embed/'+video.key | safe"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <div class="video-container">
+            <iframe [src]="'https://www.youtube.com/embed/'+video.key | safe"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+            </iframe>
+          </div>
         </div>
       </div>
       }
@@ -44,7 +47,11 @@
     <div class="row">
       <h2 class="mt-4 p-4">Top cast</h2>
 
-      <swiper-container class="mySwiper" slides-per-view="8" space-between="30" free-mode="true">
+      <swiper-container class="mySwiper" space-between="30" free-mode="true" breakpoints='{
+        "0": { "slidesPerView": 4, "spaceBetween": 10 },
+        "768": { "slidesPerView": 4, "spaceBetween": 20 },
+        "1024": { "slidesPerView": 8, "spaceBetween": 30 }
+      }'>
         @for (actor of movieCredits.cast; track $index) { @if
         (actor.profile_path) {
         <swiper-slide>

@@ -19,7 +19,11 @@
 <!-- trending start -->
 <div class="contain mt-3 p-4">
   <h2 class="trending text-white">Trending Movies</h2>
-  <swiper-container class="trending-container" slides-per-view="5" space-between="30" free-mode="true">
+  <swiper-container class="trending-container" slides-per-view="5" space-between="30" free-mode="true" breakpoints='{
+    "0": { "slidesPerView": 2, "spaceBetween": 10 },
+    "768": { "slidesPerView": 3, "spaceBetween": 20 },
+    "1024": { "slidesPerView": 5, "spaceBetween": 30 }
+  }'>
     @for (movie of Trending; track $index) {
     <swiper-slide class="trending-slide"><img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
         [routerLink]="['/movie', movie.id]" /></swiper-slide>
@@ -30,7 +34,7 @@
 
 <!-- browse movies start -->
 <div #movieBrowse class="container mx-auto px-4 py-8">
-  <h3 class="text-lg font-bold mb-4 text-white ">Browse Movies</h3>
+  <h2 class="text-lg font-bold mb-4 text-white ">Browse Movies</h2>
 
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

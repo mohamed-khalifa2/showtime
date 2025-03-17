@@ -1,3 +1,10 @@
+@if (loading) {
+<div class="flex justify-center items-center min-h-screen">
+  <app-spinner></app-spinner>
+</div>
+}
+
+@if(!loading) {
 <html [ngStyle]="{
     'background-image':
       'linear-gradient(#19283f , rgba(0, 0, 0, 0.9)), url(' + photo + ')',
@@ -67,3 +74,4 @@
 </div>
 
 </html>
+}

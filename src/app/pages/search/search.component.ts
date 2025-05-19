@@ -27,7 +27,7 @@ export class SearchComponent {
     this.searchSubject.pipe(
       debounceTime(700),
       distinctUntilChanged(),
-      switchMap((searchText) => this.Http.getMovieByTitle(searchText))
+      switchMap((value) => this.Http.getMovieByTitle(value))
     ).subscribe({
       next: (data) => {
         this.movies = data.results

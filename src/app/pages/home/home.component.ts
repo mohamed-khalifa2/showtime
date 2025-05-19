@@ -41,7 +41,6 @@ export class HomeComponent {
       next: ({ movies, banner, trending }) => {
 
         this.movies = movies.results;
-        this.pageNum = movies.total_pages;
         this.bannerMovies = banner.results;
         this.Trending = trending.results;
         this.loading = false
@@ -57,7 +56,6 @@ export class HomeComponent {
     this.Http.getMovies(this.currentPage.toString()).subscribe({
       next: (data) => {
         this.movies = data.results;
-        this.pageNum = data.total_pages;
         this.loading = false
 
       },
@@ -67,7 +65,7 @@ export class HomeComponent {
     })
   }
 
-  get paginationArray(): (number | string)[] {
+  get paginationArray(): (unknown)[] {
     const range = [];
     const delta = 2;
 
@@ -83,7 +81,7 @@ export class HomeComponent {
 
 
 
-  changePage(page: number | string) {
+  changePage(page: unknown) {
     if (page !== "..." && page !== this.currentPage) {
       this.currentPage = page;
     }

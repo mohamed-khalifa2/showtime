@@ -37,7 +37,7 @@
   <h2 class="text-lg font-bold mb-4 text-white ">Browse Movies</h2>
 
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
     @for (movie of movies; track $index) { @if (movie.poster_path) {
     <div class="cursor-pointer flex justify-center">
       <div
@@ -46,7 +46,7 @@
           <img class="w-full h-full object-cover rounded-lg"
             [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [routerLink]="['/movie', movie.id]" />
 
-          <div class="absolute bottom-0 left-0 w-full bg-black opacity-90 text-white text-center p-2">
+          <div class="absolute bottom-0 left-0 w-full bg-black opacity-90 text-white text-center p-3">
             <h5 class="text-lg font-bold">{{ movie.title }}</h5>
           </div>
         </div>

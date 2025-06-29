@@ -26,7 +26,7 @@ export class HomeComponent {
   loading = false
 
 
-  pageNum: number = 1;  //total number of pages
+  pageNum: number = 200;  //total number of pages
   currentPage: any = 1; //current page
 
   @ViewChild('movieBrowse') movieBrowse!: ElementRef; // to scroll to this section
